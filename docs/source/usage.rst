@@ -6,29 +6,37 @@ Usage
 Installation
 ------------
 
-To use Lumache, first install it using pip:
+To use DARCoMS, first go to the Impact Shock Mechanics Lab Gitlab Repo:
 
 .. code-block:: console
 
-   (.venv) $ pip install lumache
+   git chceckout DARCoMS
 
-Creating recipes
+Creating a DARCoMS .dms Input File
 ----------------
 
-To retrieve a list of random ingredients,
-you can use the ``lumache.get_random_ingredients()`` function:
+To run a DARCoMS Multiscale simulation, you must create a ``.dms`` input file:
 
-.. autofunction:: lumache.get_random_ingredients
 
-The ``kind`` parameter should be either ``"meat"``, ``"fish"``,
-or ``"veggies"``. Otherwise, :py:func:`lumache.get_random_ingredients`
-will raise an exception.
+Currently DARCoMS supports the following keywords in its input file ``NDBASES``,
+``FILES``, and ``COUPLING_SURFACES``. Otherwise, an exception will be raised.
 
-.. autoexception:: lumache.InvalidKindError
+An Example .dms Input File is:
+.. code-block:: console
 
-For example:
+   NDBASES
+   2
+   FILES 
+   C:\Users\DARCOMS\Benchmarks\Testing\B_LargeDomain125.dat
+   C:\Users\DARCOMS\Benchmarks\Testing\B_SmallDomain250.dat
+   COUPLING_SURFACES
+   CONST_ACCEL
+   2
+   4
+   1 126 252 378 504
+   2 1   252 503 754
+   
+For running Monoscale simulations (single .dat file), the ``COUPLING_SURFACES``
+should not be used.
 
->>> import lumache
->>> lumache.get_random_ingredients()
-['shells', 'gorgonzola', 'parsley']
 
